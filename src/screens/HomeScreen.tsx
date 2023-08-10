@@ -11,7 +11,7 @@ const HomeScreen = () => {
 
   return (
     <ScrollView style={{padding: 20}}>
-      <Table />
+      <Table data={users} />
     </ScrollView>
   );
 };

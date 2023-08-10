@@ -1,7 +1,15 @@
 import {User} from '../services/HttpClient';
 
 const parseUsers = (users: User[]) => {
-  console.log(users);
+  const keys = Object.keys(users[0]);
+  const result: any = {};
+
+  keys.forEach(key => {
+    // console.log('key: ', key);
+    result[key] = users.map(item => (item as any)[key]);
+  });
+
+  return result;
 };
 
 export default parseUsers;
