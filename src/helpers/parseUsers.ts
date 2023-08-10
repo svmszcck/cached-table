@@ -5,7 +5,6 @@ const parseUsers = (users: User[]) => {
   const result: any = {};
 
   keys.forEach(key => {
-    // console.log('key: ', key);
     result[key] = users.map(item => (item as any)[key]);
   });
 

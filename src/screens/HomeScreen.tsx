@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {View} from 'react-native';
 
 import Table from '../components/Table';
 import useFetchUsers from '../hooks/useFetchUsers';
@@ -10,9 +10,9 @@ const HomeScreen = () => {
   console.log(users);
 
   return (
-    <ScrollView style={{padding: 20}}>
+    <View style={{padding: 20}}>
       <Table data={users} />
-    </ScrollView>
+    </View>
   );
 };
 
