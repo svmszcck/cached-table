@@ -1,12 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 
 import {styles} from './index';
 import {User} from '../../services/HttpClient';
 import capitalize from '../../helpers/capitalize';
 
-export const renderTableHeader = (data: User[]) => {
+import UpDown from '../../icons/up-down.png';
+
+export const renderTableHeader = (
+  data: User[],
+  sortByKey: (key: string) => void,
+) => {
   const keys = Object.keys(data[0]);
 
   return (
@@ -20,7 +25,8 @@ export const renderTableHeader = (data: User[]) => {
               borderRightWidth: index === keys.length - 1 ? 1 : 0,
             },
           ]}>
-          <Text>{capitalize(key)}</Text>
+          <Text onPress={() => sortByKey(key)}>{capitalize(key)}</Text>
+          <Image source={UpDown} style={styles.icon} />
         </View>
       ))}
     </View>

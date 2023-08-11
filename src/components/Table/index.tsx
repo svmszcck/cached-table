@@ -8,6 +8,8 @@ import Picker from './Picker';
 import Search from './Search';
 import Pagination from './Pagination';
 
+import useSorting from './hooks/useSorting';
+import usePaginate from './hooks/usePaginate';
 import {User} from '../../services/HttpClient';
 import Colors from '../../constants/colors';
 
@@ -18,22 +20,25 @@ type TableProps = {
 };
 
 const Table = ({data}: TableProps) => {
+  const {page, setPage, paginatedData} = usePaginate(data);
+  const {sortedData, sortByKey} = useSorting(paginatedData);
+
   if (!data) return;
 
   return (
-    <View style={[styles.container, {minWidth: width - 40}]}>
+    <View style={styles.container}>
       <View style={styles.topSection}>
         <Picker />
         <Search />
       </View>
       <FlatList
-        data={data}
+        data={sortedData}
         showsHorizontalScrollIndicator={false}
-        ListHeaderComponent={renderTableHeader(data)}
+        ListHeaderComponent={renderTableHeader(data, sortByKey)}
         renderItem={({item, index}) => renderTableRow(data, item, index)}
         keyExtractor={item => item.name}
       />
-      <Pagination />
+      <Pagination page={page} paginate={setPage} />
     </View>
   );
 };
@@ -41,11 +46,12 @@ const Table = ({data}: TableProps) => {
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    minHeight: 300,
+    minWidth: width - 40,
     backgroundColor: Colors.white,
-    flex: 1,
+    maxHeight: 500,
   },
   cell: {
+    flexDirection: 'row',
     borderWidth: 1,
     borderBottomWidth: 0,
     borderRightWidth: 0,
@@ -59,6 +65,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 15,
     justifyContent: 'space-between',
+  },
+  icon: {
+    width: 13,
+    height: 13,
+    marginLeft: 5,
+    opacity: 0.5,
   },
 });
 

@@ -1,22 +1,27 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import colors from '../../constants/colors';
 
 import ArrowRight from '../../icons/arrow-right.png';
 
-const Pagination = () => {
+type PaginationProps = {
+  page: number;
+  paginate: (page: number) => void;
+};
+
+const Pagination = ({paginate}: PaginationProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={() => paginate(1)}>
         <Text style={styles.value}>1</Text>
-      </View>
-      <View style={styles.item}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.item} onPress={() => paginate(2)}>
         <Text style={styles.value}>2</Text>
-      </View>
-      <View style={styles.item}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.item}>
         <Image source={ArrowRight} style={styles.icon} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -24,6 +29,8 @@ const Pagination = () => {
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    marginTop: 15,
+    marginLeft: 'auto',
   },
   item: {
     alignItems: 'center',

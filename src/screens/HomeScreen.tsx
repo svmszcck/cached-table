@@ -7,8 +7,6 @@ import useFetchUsers from '../hooks/useFetchUsers';
 const HomeScreen = () => {
   const {users} = useFetchUsers();
 
-  console.log(users);
-
   return (
     <View style={{padding: 20}}>
       <Table data={users} />

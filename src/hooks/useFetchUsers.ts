@@ -14,7 +14,7 @@ const useFetchUsers = () => {
     setUsers(data);
   };
 
-  return {users};
+  return {users, setUsers};
 };
 
 export default useFetchUsers;
