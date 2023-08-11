@@ -3,9 +3,13 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 import {User} from '../../services/HttpClient';
-import {styles} from '.';
+import styles from './styles';
 
-export const renderTableRow = (data: User[], item: User, index: number) => {
+export const renderTableRow = (
+  sortedData: User[],
+  item: User,
+  index: number,
+) => {
   const values = Object.values(item);
 
   return (
@@ -16,7 +20,7 @@ export const renderTableRow = (data: User[], item: User, index: number) => {
           style={[
             styles.cell,
             {
-              borderBottomWidth: index === data.length - 1 ? 1 : 0,
+              borderBottomWidth: index === sortedData.length - 1 ? 1 : 0,
               borderRightWidth: column === values.length - 1 ? 1 : 0,
             },
           ]}>

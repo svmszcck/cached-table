@@ -11,9 +11,11 @@ const useSorting = (paginatedData: any[] | undefined) => {
     if (!paginatedData) return;
     if (!key || !direction) return paginatedData;
 
-    const result = paginatedData.sort((a, b) => {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return +1;
+    const result = [...paginatedData].sort((a, b) => {
+      const isAscending = direction === 'asc';
+
+      if (a[key] < b[key]) return isAscending ? -1 : +1;
+      if (a[key] > b[key]) return isAscending ? +1 : -1;
 
       return 0;
     });
@@ -21,7 +23,7 @@ const useSorting = (paginatedData: any[] | undefined) => {
     return result;
   }, [paginatedData, direction, key]);
 
-  const sortByKey = (newKey: string) => {
+  const sortByKey = (newKey: string): void => {
     setKey(newKey);
 
     if (!direction) {

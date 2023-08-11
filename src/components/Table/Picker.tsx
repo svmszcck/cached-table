@@ -1,15 +1,23 @@
 import React from 'react';
-import {Image, Text, View, StyleSheet} from 'react-native';
+import {Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import ArrowDown from '../../icons/arrow-down.png';
 import Colors from '../../constants/colors';
 
-const Picker = () => {
+type PickerProps = {
+  pageSize: number;
+  changePageSize: () => void;
+};
+
+const Picker = ({pageSize, changePageSize}: PickerProps) => {
   return (
-    <View style={styles.container}>
-      <Text>10 per page</Text>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      onPress={changePageSize}>
+      <Text>{pageSize} per page</Text>
       <Image source={ArrowDown} style={styles.icon} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
