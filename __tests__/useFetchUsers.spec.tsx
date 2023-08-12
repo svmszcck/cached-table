@@ -10,8 +10,6 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 
-// jest.useFakeTimers();
-
 it('fetches data from api', async () => {
   const data = await HttpClient.fetchUsers();
 
