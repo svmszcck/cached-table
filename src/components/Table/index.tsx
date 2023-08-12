@@ -18,9 +18,9 @@ type TableProps = {
 };
 
 const Table = ({data}: TableProps) => {
-  const {page, setPage, paginatedData, pageSize, changePageSize} =
-    usePaginate(data);
-  const {direction, key, sortedData, sortByKey} = useSorting(paginatedData);
+  const {direction, key, sortedData, sortByKey} = useSorting(data);
+  const {page, setPage, paginatedData, pageSize, changePageSize, pageCount} =
+    usePaginate(sortedData);
 
   if (!data) return;
 
@@ -31,21 +31,31 @@ const Table = ({data}: TableProps) => {
         <Search />
       </View>
       <FlatList
-        data={sortedData}
+        data={paginatedData}
         showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        style={styles.table}
         ListHeaderComponent={renderTableHeader(
           Object.keys(data[0]),
-          sortedData,
+          paginatedData,
           sortByKey,
           direction,
           key,
         )}
+        ListFooterComponent={
+          <Pagination
+            page={page}
+            setPage={setPage}
+            paginate={setPage}
+            pageSize={pageSize}
+            pageCount={pageCount}
+          />
+        }
         renderItem={({item, index}) =>
-          renderTableRow(sortedData || [], item, index)
+          renderTableRow(paginatedData || [], item, index)
         }
         keyExtractor={item => item.name}
       />
-      <Pagination page={page} paginate={setPage} />
     </View>
   );
 };

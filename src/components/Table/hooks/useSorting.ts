@@ -3,15 +3,15 @@ import {useState, useMemo} from 'react';
 
 export type Direction = 'asc' | 'desc';
 
-const useSorting = (paginatedData: any[] | undefined) => {
+const useSorting = (data: any[] | undefined) => {
   const [direction, setDirection] = useState<Direction>();
   const [key, setKey] = useState<string>();
 
   const sortedData = useMemo(() => {
-    if (!paginatedData) return;
-    if (!key || !direction) return paginatedData;
+    if (!data) return;
+    if (!key || !direction) return data;
 
-    const result = [...paginatedData].sort((a, b) => {
+    const result = [...data].sort((a, b) => {
       const isAscending = direction === 'asc';
 
       if (a[key] < b[key]) return isAscending ? -1 : +1;
@@ -21,12 +21,15 @@ const useSorting = (paginatedData: any[] | undefined) => {
     });
 
     return result;
-  }, [paginatedData, direction, key]);
+  }, [data, direction, key]);
 
   const sortByKey = (newKey: string): void => {
-    setKey(newKey);
+    if (key !== newKey) {
+      setKey(newKey);
+      setDirection('asc');
+    }
 
-    if (!direction) {
+    if (!direction || key !== newKey) {
       setDirection('asc');
     } else if (direction === 'asc') {
       setDirection('desc');

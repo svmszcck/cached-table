@@ -2,14 +2,16 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from '../../constants/colors';
 
-const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    minWidth: width - 40,
     backgroundColor: Colors.white,
-    maxHeight: 500,
+    height,
+  },
+  table: {
+    marginBottom: 50,
   },
   cell: {
     flexDirection: 'row',

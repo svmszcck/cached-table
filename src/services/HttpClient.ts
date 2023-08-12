@@ -46,6 +46,14 @@ export class HttpClient {
       name: 'Salih',
       age: 77,
     },
+    {
+      name: 'Didem',
+      age: 34,
+    },
+    {
+      name: 'Cemile',
+      age: 65,
+    },
   ];
   public static async fetchUsers(): Promise<User[]> {
     return Promise.resolve(HttpClient.users);
