@@ -1,13 +1,15 @@
 /* eslint-disable curly */
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
-const usePaginate = (data: any[] | undefined) => {
+import {Item} from '../index';
+
+const usePaginate = (data?: Item[]) => {
   const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(5);
-  const [paginatedData, setPaginatedData] = useState<any[]>();
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [paginatedData, setPaginatedData] = useState<Item[]>();
 
   const paginate = useCallback(
-    (array: any[], size: number, pageNumber: number): any[] => {
+    (array: Item[], size: number, pageNumber: number): Item[] => {
       setPage(pageNumber);
       return array.slice((pageNumber - 1) * size, pageNumber * size);
     },
@@ -31,7 +33,7 @@ const usePaginate = (data: any[] | undefined) => {
   }, [data, pageSize]);
 
   const changePageSize = () => {
-    if (pageSize === 5) setPageSize(20);
+    if (pageSize === 10) setPageSize(20);
     else if (pageSize === 20) setPageSize(30);
     else if (pageSize === 30) setPageSize(40);
     else if (pageSize === 40) setPageSize(50);

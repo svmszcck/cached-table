@@ -1,11 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
 import Colors from '../../constants/colors';
 
-const Search = () => {
+type SearchProps = {
+  onSearch: (text: string) => void;
+};
+
+const Search = ({onSearch}: SearchProps) => {
+  const [value, setValue] = useState<string>('');
+
+  const handleSearch = (text: string) => {
+    setValue(text);
+    onSearch(text);
+  };
+
   return (
-    <TextInput style={styles.container} value="" placeholder="search..." />
+    <TextInput
+      style={styles.container}
+      value={value}
+      placeholder="search..."
+      onChangeText={handleSearch}
+    />
   );
 };
 

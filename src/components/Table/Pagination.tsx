@@ -24,11 +24,9 @@ const Pagination = ({page, setPage, paginate, pageCount}: PaginationProps) => {
   const handleArrow = (type: Modify) => {
     if (type === 'down') {
       if (page === 1) return;
-
       setPage(page - 1);
     } else if (type === 'up') {
       if (page === pageCount) return;
-
       setPage(page + 1);
     }
   };
@@ -38,14 +36,14 @@ const Pagination = ({page, setPage, paginate, pageCount}: PaginationProps) => {
       <TouchableOpacity
         style={[styles.item, {}]}
         onPress={() => paginate(isLastPage ? page - 1 : page)}>
-        <Text style={[styles.value, {opacity: isLastPage ? 0.6 : 1}]}>
+        <Text style={[styles.value, {opacity: isLastPage ? 0.4 : 1}]}>
           {isLastPage ? page - 1 : page}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.item]}
         onPress={() => paginate(isLastPage ? page : page + 1)}>
-        <Text style={[styles.value, {opacity: isLastPage ? 1 : 0.6}]}>
+        <Text style={[styles.value, {opacity: isLastPage ? 1 : 0.4}]}>
           {isLastPage ? page : page + 1}
         </Text>
       </TouchableOpacity>

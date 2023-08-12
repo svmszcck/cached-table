@@ -1,6 +1,7 @@
 /* eslint-disable curly */
 import React from 'react';
 import {FlatList, View} from 'react-native';
+import uuid from 'react-native-uuid';
 
 import {renderTableHeader} from './Header';
 import {renderTableRow} from './Row';
@@ -10,14 +11,18 @@ import Pagination from './Pagination';
 
 import useSorting from './hooks/useSorting';
 import usePaginate from './hooks/usePaginate';
-import {User} from '../../services/HttpClient';
 import styles from './styles';
 
+export type Limit = {index: number; value: number};
+
+export type Item = {[key: string]: number | string};
+
 type TableProps = {
-  data?: User[];
+  data?: Item[];
+  limit?: Limit;
 };
 
-const Table = ({data}: TableProps) => {
+const Table = ({data, limit}: TableProps) => {
   const {direction, key, sortedData, sortByKey} = useSorting(data);
   const {page, setPage, paginatedData, pageSize, changePageSize, pageCount} =
     usePaginate(sortedData);
@@ -28,7 +33,7 @@ const Table = ({data}: TableProps) => {
     <View style={styles.container}>
       <View style={styles.topSection}>
         <Picker pageSize={pageSize} changePageSize={changePageSize} />
-        <Search />
+        <Search onSearch={() => {}} />
       </View>
       <FlatList
         data={paginatedData}
@@ -37,8 +42,8 @@ const Table = ({data}: TableProps) => {
         style={styles.table}
         ListHeaderComponent={renderTableHeader(
           Object.keys(data[0]),
-          paginatedData,
           sortByKey,
+          paginatedData,
           direction,
           key,
         )}
@@ -52,9 +57,9 @@ const Table = ({data}: TableProps) => {
           />
         }
         renderItem={({item, index}) =>
-          renderTableRow(paginatedData || [], item, index)
+          renderTableRow(paginatedData || [], item, index, limit)
         }
-        keyExtractor={item => item.name}
+        keyExtractor={() => uuid.v4().toString()}
       />
     </View>
   );

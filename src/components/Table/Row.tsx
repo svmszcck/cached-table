@@ -1,16 +1,26 @@
+/* eslint-disable curly */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Image, Text} from 'react-native';
 
-import {User} from '../../services/HttpClient';
+import {Limit, Item} from './index';
 import styles from './styles';
 
+import Warning from '../../icons/warning.png';
+
 export const renderTableRow = (
-  sortedData: User[],
-  item: User,
+  sortedData: Item[],
+  item: Item,
   index: number,
+  limit?: Limit,
 ) => {
   const values = Object.values(item);
+
+  const hasWarning = (value: number, column: number): boolean => {
+    if (!limit) return false;
+
+    return limit && column === limit.index && value > limit.value;
+  };
 
   return (
     <View style={{flexDirection: 'row'}}>
@@ -24,7 +34,11 @@ export const renderTableRow = (
               borderRightWidth: column === values.length - 1 ? 1 : 0,
             },
           ]}>
-          <Text>{value}</Text>
+          {typeof value === 'number' && hasWarning(value, column) ? (
+            <Image source={Warning} style={[styles.icon]} />
+          ) : (
+            <Text>{value}</Text>
+          )}
         </View>
       ))}
     </View>

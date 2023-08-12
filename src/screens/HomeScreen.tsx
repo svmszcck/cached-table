@@ -9,7 +9,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Table data={users} />
+      <Table data={users} limit={{index: 1, value: 60}} />
     </View>
   );
 };

@@ -1,9 +1,11 @@
 /* eslint-disable curly */
 import {useState, useMemo} from 'react';
 
+import {Item} from '../index';
+
 export type Direction = 'asc' | 'desc';
 
-const useSorting = (data: any[] | undefined) => {
+const useSorting = (data?: Item[]) => {
   const [direction, setDirection] = useState<Direction>();
   const [key, setKey] = useState<string>();
 
