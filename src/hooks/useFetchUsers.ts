@@ -21,7 +21,8 @@ const useFetchUsers = () => {
       setItem('time', Date.now());
     };
 
-    if (time && checkHourDifference(time, Date.now()) <= 1) {
+    // less than 1 hour passed
+    if (time && checkHourDifference(time, Date.now()) < 1) {
       const data = await getItem('data');
 
       if (!data) fetchData();

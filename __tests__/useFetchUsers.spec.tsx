@@ -18,6 +18,7 @@ it('fetches data from api', async () => {
   await waitForNextUpdate();
 
   expect(AsyncStorage.getItem).toBeCalledWith('time');
+  expect(AsyncStorage.setItem).toHaveBeenCalled();
   expect(result.current.users).toEqual(data);
 });
 
