@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 
 import Table from '../components/Table';
 import useFetchUsers from '../hooks/useFetchUsers';
+import Colors from '../constants/colors';
 
 const HomeScreen = () => {
   const {users} = useFetchUsers();
@@ -16,6 +17,7 @@ const HomeScreen = () => {
 
 export const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.white,
     padding: 20,
   },
 });
