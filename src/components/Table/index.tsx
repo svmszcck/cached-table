@@ -1,6 +1,6 @@
 /* eslint-disable curly */
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {Alert, FlatList, View} from 'react-native';
 import uuid from 'react-native-uuid';
 
 import {renderTableHeader} from './Header';
@@ -33,7 +33,7 @@ const Table = ({data, limit}: TableProps) => {
     <View style={styles.container}>
       <View style={styles.topSection}>
         <Picker pageSize={pageSize} changePageSize={changePageSize} />
-        <Search onSearch={() => {}} />
+        <Search onSearch={() => Alert.alert('Not Implemented')} />
       </View>
       <FlatList
         data={paginatedData}

@@ -10,17 +10,13 @@ type SearchProps = {
 const Search = ({onSearch}: SearchProps) => {
   const [value, setValue] = useState<string>('');
 
-  const handleSearch = (text: string) => {
-    setValue(text);
-    onSearch(text);
-  };
-
   return (
     <TextInput
       style={styles.container}
       value={value}
       placeholder="search..."
-      onChangeText={handleSearch}
+      onChangeText={setValue}
+      onSubmitEditing={() => onSearch(value)}
     />
   );
 };
