@@ -33,4 +33,24 @@ describe('useSorting hook', () => {
 
     expect(result.current.sortedData).toEqual(data);
   });
+
+  it('sort different columnns', async () => {
+    const {result} = renderHook(() => useSorting(data));
+
+    result.current.sortByKey('name');
+
+    expect(result.current.sortedData).toEqual([
+      {name: 'Maria', age: 27},
+      {name: 'Michael', age: 45},
+      {name: 'Onur', age: 32},
+    ]);
+
+    result.current.sortByKey('age');
+
+    expect(result.current.sortedData).toEqual([
+      {name: 'Maria', age: 27},
+      {name: 'Onur', age: 32},
+      {name: 'Michael', age: 45},
+    ]);
+  });
 });
