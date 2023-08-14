@@ -33,13 +33,15 @@ const Pagination = ({page, setPage, paginate, pageCount}: PaginationProps) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.item, {}]}
-        onPress={() => paginate(isLastPage ? page - 1 : page)}>
-        <Text style={[styles.value, {opacity: isLastPage ? 0.4 : 1}]}>
-          {isLastPage ? page - 1 : page}
-        </Text>
-      </TouchableOpacity>
+      {pageCount && pageCount > 1 && (
+        <TouchableOpacity
+          style={[styles.item, {}]}
+          onPress={() => paginate(isLastPage ? page - 1 : page)}>
+          <Text style={[styles.value, {opacity: isLastPage ? 0.4 : 1}]}>
+            {isLastPage ? page - 1 : page}
+          </Text>
+        </TouchableOpacity>
+      )}
       <TouchableOpacity
         style={[styles.item]}
         onPress={() => paginate(isLastPage ? page : page + 1)}>
