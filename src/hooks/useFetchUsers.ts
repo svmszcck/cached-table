@@ -7,6 +7,7 @@ import checkHourDifference from '../helpers/checkHourDifference';
 
 const useFetchUsers = () => {
   const [users, setUsers] = useState<User[]>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchUsers();
@@ -18,6 +19,7 @@ const useFetchUsers = () => {
     const fetchData = async () => {
       const data = await HttpClient.fetchUsers();
       setUsers(data);
+      setLoading(false);
       setItem('time', Date.now());
     };
 
@@ -26,13 +28,16 @@ const useFetchUsers = () => {
       const data = await getItem('data');
 
       if (!data) fetchData();
-      else setUsers(data);
+      else {
+        setUsers(data);
+        setLoading(false);
+      }
     } else {
       fetchData();
     }
   };
 
-  return {users, setUsers};
+  return {loading, users, setUsers};
 };
 
 export default useFetchUsers;
