@@ -1,6 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const setItem = async (key: string, value: string | object | number) => {
+export const setItem = async (
+  key: string,
+  value: string | object | number,
+): Promise<void> => {
   const parsedData =
     typeof value === 'object' || typeof value === 'number'
       ? JSON.stringify(value)

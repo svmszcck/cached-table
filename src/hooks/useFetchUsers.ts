@@ -12,7 +12,7 @@ const useFetchUsers = () => {
     fetchUsers();
   }, []);
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (): Promise<void> => {
     const time = await getItem('time');
 
     const fetchData = async () => {
