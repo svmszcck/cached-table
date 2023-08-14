@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   table: {
     marginBottom: 50,
   },
-  header: {
+  row: {
     flexDirection: 'row',
   },
   cell: {

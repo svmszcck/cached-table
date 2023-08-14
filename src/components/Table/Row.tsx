@@ -23,7 +23,7 @@ export const renderTableRow = (
   };
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.row}>
       {values.map((value, column) => (
         <View
           key={column}
