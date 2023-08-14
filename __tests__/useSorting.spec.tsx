@@ -11,7 +11,7 @@ const data = [
 
 describe('useSorting hook', () => {
   it('sort same column continuously', async () => {
-    const {result, waitForNextUpdate} = renderHook(() => useSorting(data));
+    const {result} = renderHook(() => useSorting(data));
 
     result.current.sortByKey('age');
 
