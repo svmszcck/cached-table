@@ -1,7 +1,7 @@
 import 'react-native';
 import {renderHook} from '@testing-library/react-hooks';
 
-import useSorting from '../src/components/Table/hooks/useSorting';
+import useSorting from '../hooks/useSorting';
 
 const data = [
   {name: 'Onur', age: 32},
