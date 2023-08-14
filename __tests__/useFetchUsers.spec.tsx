@@ -10,28 +10,30 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 
-it('fetches data from api', async () => {
-  const data = await HttpClient.fetchUsers();
+describe('useFetchUsers hook', () => {
+  it('fetches data from api', async () => {
+    const data = await HttpClient.fetchUsers();
 
-  const {result, waitForNextUpdate} = renderHook(useFetchUsers);
+    const {result, waitForNextUpdate} = renderHook(useFetchUsers);
 
-  await waitForNextUpdate();
+    await waitForNextUpdate();
 
-  expect(AsyncStorage.getItem).toBeCalledWith('time');
-  expect(AsyncStorage.setItem).toHaveBeenCalled();
-  expect(result.current.users).toEqual(data);
-});
+    expect(AsyncStorage.getItem).toBeCalledWith('time');
+    expect(AsyncStorage.setItem).toHaveBeenCalled();
+    expect(result.current.users).toEqual(data);
+  });
 
-it('fetches data from async storage', async () => {
-  const data = await HttpClient.fetchUsers();
-  await AsyncStorage.setItem('time', JSON.stringify(Date.now() - 3000000));
+  it('fetches data from async storage', async () => {
+    const data = await HttpClient.fetchUsers();
+    await AsyncStorage.setItem('time', JSON.stringify(Date.now() - 3000000));
 
-  const {result, waitForNextUpdate} = renderHook(useFetchUsers);
+    const {result, waitForNextUpdate} = renderHook(useFetchUsers);
 
-  await waitForNextUpdate();
+    await waitForNextUpdate();
 
-  expect(AsyncStorage.getItem).toBeCalledWith('time');
-  // Data was fetched from async storage instead of api
-  expect(AsyncStorage.getItem).toBeCalledWith('data');
-  expect(result.current.users).toEqual(data);
+    expect(AsyncStorage.getItem).toBeCalledWith('time');
+    // Data was fetched from async storage instead of api
+    expect(AsyncStorage.getItem).toBeCalledWith('data');
+    expect(result.current.users).toEqual(data);
+  });
 });
