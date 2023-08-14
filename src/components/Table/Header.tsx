@@ -17,7 +17,7 @@ export const renderTableHeader = (
   sortKey?: string,
 ) => {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.header}>
       {keys.map((key, index) => (
         <Pressable
           key={index}

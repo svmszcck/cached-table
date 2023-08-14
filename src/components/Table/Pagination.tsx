@@ -21,7 +21,7 @@ type Modify = 'down' | 'up';
 const Pagination = ({page, setPage, paginate, pageCount}: PaginationProps) => {
   const isLastPage = page === pageCount;
 
-  const handleArrow = (type: Modify) => {
+  const handleArrow = (type: Modify): void => {
     if (type === 'down') {
       if (page === 1) return;
       setPage(page - 1);

@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   table: {
     marginBottom: 50,
   },
+  header: {
+    flexDirection: 'row',
+  },
   cell: {
     flexDirection: 'row',
     borderWidth: 1,
