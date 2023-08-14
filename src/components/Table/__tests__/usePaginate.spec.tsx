@@ -31,4 +31,16 @@ describe('usePaginate hook', () => {
 
     expect(result.current.paginatedData).toEqual(data.slice(10));
   });
+
+  it('change page size correctly', async () => {
+    const {result, waitForNextUpdate} = renderHook(() => usePaginate(data));
+
+    result.current.changePageSize();
+
+    await waitForNextUpdate();
+
+    expect(result.current.pageSize).toEqual(20);
+    expect(result.current.pageCount).toEqual(1);
+    expect(result.current.paginatedData).toEqual(data);
+  });
 });
